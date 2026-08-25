@@ -39,6 +39,7 @@ interface Profile {
   heroTitle: string;
   heroSubtitle: string;
   email: string;
+  instagramUrl?: string;
 }
 
 export default function HomePage() {
@@ -328,14 +329,31 @@ export default function HomePage() {
             <p className="text-zinc-400 font-light leading-relaxed">
               {profile?.bio}
             </p>
-            <div className="flex flex-col sm:flex-row items-center gap-4 mt-2 justify-center md:justify-start">
-              <span className="text-zinc-500 text-sm">Get in touch:</span>
-              <a
-                href={`mailto:${profile?.email}`}
-                className="text-indigo-400 hover:text-indigo-300 font-semibold text-sm underline"
-              >
-                {profile?.email}
-              </a>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-x-6 gap-y-2 mt-3 justify-center md:justify-start">
+              {profile?.email && (
+                <div className="flex items-center gap-2">
+                  <span className="text-zinc-500 text-sm">Email:</span>
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="text-indigo-400 hover:text-indigo-300 font-semibold text-sm underline"
+                  >
+                    {profile.email}
+                  </a>
+                </div>
+              )}
+              {profile?.instagramUrl && (
+                <div className="flex items-center gap-2">
+                  <span className="text-zinc-500 text-sm">Instagram:</span>
+                  <a
+                    href={profile.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-indigo-400 hover:text-indigo-300 font-semibold text-sm underline"
+                  >
+                    @{profile.instagramUrl.split("/").filter(Boolean).pop()}
+                  </a>
+                </div>
+              )}
             </div>
           </div>
         </div>

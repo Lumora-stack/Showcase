@@ -14,6 +14,7 @@ interface Profile {
   heroTitle: string;
   heroSubtitle: string;
   email: string;
+  instagramUrl?: string;
 }
 
 interface SocialLink {
@@ -63,6 +64,7 @@ export default function AdminSettingsPage() {
     heroTitle: "",
     heroSubtitle: "",
     email: "",
+    instagramUrl: "",
   });
 
   const [socials, setSocials] = useState<SocialLink[]>([]);
@@ -127,6 +129,7 @@ export default function AdminSettingsPage() {
         heroTitle: profile.heroTitle || "",
         heroSubtitle: profile.heroSubtitle || "",
         email: profile.email || "",
+        instagramUrl: profile.instagramUrl || "",
         updatedAt: Date.now(),
       };
 
@@ -241,7 +244,7 @@ export default function AdminSettingsPage() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Full Name</label>
               <input
@@ -262,6 +265,17 @@ export default function AdminSettingsPage() {
                 value={profile.email}
                 onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                 placeholder="praveenkumar@example.com"
+                className="w-full bg-zinc-900 border border-zinc-800 focus:border-indigo-500 focus:outline-none rounded-lg py-2 px-3 text-sm text-white transition-colors"
+              />
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Instagram Profile URL</label>
+              <input
+                type="url"
+                value={profile.instagramUrl || ""}
+                onChange={(e) => setProfile({ ...profile, instagramUrl: e.target.value })}
+                placeholder="https://instagram.com/username"
                 className="w-full bg-zinc-900 border border-zinc-800 focus:border-indigo-500 focus:outline-none rounded-lg py-2 px-3 text-sm text-white transition-colors"
               />
             </div>
