@@ -56,12 +56,12 @@ export default function HomePage() {
       } else {
         // Sensible default/fallback
         setProfile({
-          name: "Praveenkumar",
+          name: "Stephan Salvatore",
           bio: "I am a digital creator, software developer, and creative generalist. I design tools, build apps, and release assets to make the internet a more colorful and efficient place.",
           avatarUrl: "",
           heroTitle: "I build digital products, software and creative experiments.",
           heroSubtitle: "Welcome to my creative universe. Explore my latest tools, software releases, and curated resources.",
-          email: "praveenkumar@example.com",
+          email: "stephan@example.com",
         });
       }
     });

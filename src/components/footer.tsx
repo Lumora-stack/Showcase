@@ -75,7 +75,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex flex-col items-center md:items-start gap-1">
             <div className="flex items-center gap-2">
-              <span className="font-bold tracking-wider text-sm text-zinc-300">PRAVEENKUMAR</span>
+              <span className="font-bold tracking-wider text-sm text-zinc-300">STEPHAN SALVATORE</span>
               <span className="w-1 h-1 bg-indigo-500 rounded-full"></span>
             </div>
             <p className="text-xs text-zinc-500">© {new Date().getFullYear()} All creative works and rights reserved.</p>

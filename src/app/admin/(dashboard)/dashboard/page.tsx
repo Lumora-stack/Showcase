@@ -65,12 +65,12 @@ export default function AdminDashboardPage() {
       
       // 1. Seed Profile
       await setDoc(firestoreDoc(db, "profile", "admin"), {
-        name: "Praveenkumar",
+        name: "Stephan Salvatore",
         bio: "I am a digital creator, software developer, and creative generalist. I design tools, build apps, and release assets to make the internet a more colorful and efficient place.",
         avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60", // Unsplash premium avatar placeholder
         heroTitle: "I build digital products, software and creative experiments.",
         heroSubtitle: "Welcome to my creative universe. Explore my latest tools, software releases, and curated resources.",
-        email: "praveenkumar@example.com",
+        email: "stephan@example.com",
         updatedAt: Date.now(),
       });
 

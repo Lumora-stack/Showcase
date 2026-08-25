@@ -29,7 +29,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="text-xl font-bold tracking-tight text-white group-hover:text-indigo-400 transition-colors">
-                PRAVEENKUMAR
+                STEPHAN SALVATORE
               </span>
               <span className="w-1.5 h-1.5 bg-indigo-500 rounded-full group-hover:scale-150 transition-all duration-300"></span>
             </Link>
