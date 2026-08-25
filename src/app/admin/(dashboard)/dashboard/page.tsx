@@ -70,7 +70,7 @@ export default function AdminDashboardPage() {
         avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=60", // Unsplash premium avatar placeholder
         heroTitle: "I build digital products, software and creative experiments.",
         heroSubtitle: "Welcome to my creative universe. Explore my latest tools, software releases, and curated resources.",
-        email: "stephan@example.com",
+        email: "quantumvoyager2005@gmail.com",
         updatedAt: Date.now(),
       });
 

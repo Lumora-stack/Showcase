@@ -61,7 +61,7 @@ export default function HomePage() {
           avatarUrl: "",
           heroTitle: "I build digital products, software and creative experiments.",
           heroSubtitle: "Welcome to my creative universe. Explore my latest tools, software releases, and curated resources.",
-          email: "stephan@example.com",
+          email: "quantumvoyager2005@gmail.com",
         });
       }
     });
