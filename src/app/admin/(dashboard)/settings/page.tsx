@@ -23,6 +23,38 @@ interface SocialLink {
   sortOrder: number;
 }
 
+const compressImage = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 400; // Optimize profile avatars to be smaller
+        let width = img.width;
+        let height = img.height;
+
+        if (width > MAX_WIDTH) {
+          height = Math.round((height * MAX_WIDTH) / width);
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+        
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.6);
+        resolve(dataUrl);
+      };
+      img.onerror = (err) => reject(err);
+    };
+    reader.onerror = (err) => reject(err);
+  });
+};
+
 export default function AdminSettingsPage() {
   const [profile, setProfile] = useState<Profile>({
     name: "",
@@ -83,11 +115,9 @@ export default function AdminSettingsPage() {
     try {
       let finalAvatarUrl = profile.avatarUrl;
 
-      // 1. Upload Avatar if selected
+      // 1. Process Avatar to Base64
       if (avatarFile) {
-        const avatarRef = ref(storage, `profile/avatar_${Date.now()}`);
-        const snap = await uploadBytes(avatarRef, avatarFile);
-        finalAvatarUrl = await getDownloadURL(snap.ref);
+        finalAvatarUrl = await compressImage(avatarFile);
       }
 
       const updatedProfile = {

@@ -24,7 +24,39 @@ interface Product {
   published: boolean;
   sortOrder: number;
 }
+// Helper function to compress and convert images to Base64 (saving in Firestore, bypassing Storage Blaze plan)
+const compressImage = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (event) => {
+      const img = new window.Image();
+      img.src = event.target?.result as string;
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 600; // Optimize width for fast database loads
+        let width = img.width;
+        let height = img.height;
 
+        if (width > MAX_WIDTH) {
+          height = Math.round((height * MAX_WIDTH) / width);
+          width = MAX_WIDTH;
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, width, height);
+        
+        // Output compressed JPEG
+        const dataUrl = canvas.toDataURL("image/jpeg", 0.6);
+        resolve(dataUrl);
+      };
+      img.onerror = (err) => reject(err);
+    };
+    reader.onerror = (err) => reject(err);
+  });
+};
 function ProductsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -169,23 +201,17 @@ function ProductsContent() {
       let finalThumbnailUrl = thumbnailUrl;
       const finalGalleryUrls = [...galleryUrls];
 
-      // 1. Upload Thumbnail
+      // 1. Process Thumbnail to Base64
       if (thumbnailFile) {
-        const timeStamp = Date.now();
-        const thumbRef = ref(storage, `products/thumbnails/${timeStamp}_${thumbnailFile.name}`);
-        const snap = await uploadBytes(thumbRef, thumbnailFile);
-        finalThumbnailUrl = await getDownloadURL(snap.ref);
+        finalThumbnailUrl = await compressImage(thumbnailFile);
       }
 
-      // 2. Upload Gallery Images
+      // 2. Process Gallery Images to Base64
       if (galleryFiles && galleryFiles.length > 0) {
         for (let i = 0; i < galleryFiles.length; i++) {
           const file = galleryFiles[i];
-          const timeStamp = Date.now();
-          const galleryItemRef = ref(storage, `products/gallery/${timeStamp}_${file.name}`);
-          const snap = await uploadBytes(galleryItemRef, file);
-          const url = await getDownloadURL(snap.ref);
-          finalGalleryUrls.push(url);
+          const base64Url = await compressImage(file);
+          finalGalleryUrls.push(base64Url);
         }
       }
 
