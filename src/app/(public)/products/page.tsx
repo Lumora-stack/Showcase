@@ -126,7 +126,7 @@ export default function ProductsPage() {
           {filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="group border border-zinc-850 bg-zinc-900/40 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full"
+              className="group border border-zinc-850 bg-zinc-900/40 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col h-full w-full max-w-sm mx-auto md:max-w-none"
             >
               <Link href={`/products/${product.slug}`} className="relative aspect-square w-full bg-zinc-950 overflow-hidden block">
                 {product.thumbnailUrl ? (

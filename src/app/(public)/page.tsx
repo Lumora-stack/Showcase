@@ -179,7 +179,7 @@ export default function HomePage() {
               <Link
                 key={project.id}
                 href={`/projects/${project.slug}`}
-                className="group border border-zinc-850 bg-zinc-900/40 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                className="group border border-zinc-850 bg-zinc-900/40 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col w-full max-w-sm mx-auto md:max-w-none"
               >
                 <div className="relative aspect-video w-full bg-zinc-950 overflow-hidden">
                   {project.thumbnailUrl ? (
@@ -246,7 +246,7 @@ export default function HomePage() {
             {featuredProducts.map((product) => (
               <div
                 key={product.id}
-                className="group border border-zinc-850 bg-zinc-900/40 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col"
+                className="group border border-zinc-850 bg-zinc-900/40 rounded-xl overflow-hidden hover:border-zinc-700 transition-all duration-300 hover:-translate-y-1 flex flex-col w-full max-w-sm mx-auto md:max-w-none"
               >
                 <Link href={`/products/${product.slug}`} className="relative aspect-square w-full bg-zinc-950 overflow-hidden block">
                   {product.thumbnailUrl ? (
