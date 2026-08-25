@@ -56,7 +56,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (!loading && !user && pathname.startsWith("/admin") && pathname !== "/admin/login") {
+    if (!loading && !user && pathname.startsWith("/admin") && pathname !== "/admin/login" && pathname !== "/admin/setup") {
       router.push("/admin/login");
     }
   }, [user, loading, pathname, router]);
@@ -73,7 +73,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   }
 
   // Prevent viewing admin pages if not logged in
-  if (!user && pathname.startsWith("/admin") && pathname !== "/admin/login") {
+  if (!user && pathname.startsWith("/admin") && pathname !== "/admin/login" && pathname !== "/admin/setup") {
     return null;
   }
 
