@@ -81,6 +81,20 @@ export default function Footer() {
             <p className="text-xs text-zinc-500">© {new Date().getFullYear()} All creative works and rights reserved.</p>
           </div>
 
+          <div className="flex items-center gap-4">
+            {socials.map((social) => (
+              <a
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-500 hover:text-indigo-400 hover:scale-110 transition-all duration-300"
+                title={social.platform}
+              >
+                {getIcon(social.platform)}
+              </a>
+            ))}
+          </div>
 
         </div>
       </div>
