@@ -369,11 +369,18 @@ function ProductsContent() {
           {/* Image Upload Row */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-zinc-850 pt-6">
             <div className="flex flex-col gap-2.5">
-              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Product Thumbnail / Cover</label>
+              <label className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Product Image / Cover URL</label>
+              <input
+                type="text"
+                value={thumbnailUrl}
+                onChange={(e) => setThumbnailUrl(e.target.value)}
+                placeholder="https://i.imgur.com/... or upload file below"
+                className="w-full bg-zinc-900 border border-zinc-800 focus:border-indigo-500 focus:outline-none rounded-lg py-2 px-3 text-sm text-white transition-colors"
+              />
               <div className="flex items-center gap-4">
-                <label className="flex items-center gap-2 border border-dashed border-zinc-800 hover:border-zinc-700 bg-zinc-900/30 px-4 py-3 rounded-lg cursor-pointer transition-colors text-xs font-semibold text-zinc-300">
-                  <Upload className="w-4 h-4 text-indigo-400" />
-                  Select File
+                <label className="flex items-center gap-2 border border-dashed border-zinc-800 hover:border-zinc-700 bg-zinc-900/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-xs font-semibold text-zinc-300">
+                  <Upload className="w-3.5 h-3.5 text-indigo-400" />
+                  Or Upload File
                   <input
                     type="file"
                     accept="image/*"
@@ -381,9 +388,9 @@ function ProductsContent() {
                     className="hidden"
                   />
                 </label>
-                {(thumbnailFile || thumbnailUrl) && (
+                {thumbnailFile && (
                   <span className="text-xs text-zinc-500 truncate max-w-xs">
-                    {thumbnailFile ? thumbnailFile.name : "Loaded from database"}
+                    {thumbnailFile.name}
                   </span>
                 )}
               </div>

@@ -184,17 +184,26 @@ export default function AdminSettingsPage() {
             </div>
 
             <div className="flex flex-col gap-2 w-full">
-              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Avatar / Profile Picture</span>
-              <label className="flex items-center justify-center gap-2 border border-zinc-800 hover:border-zinc-700 bg-zinc-900/40 px-4 py-2 rounded-lg cursor-pointer transition-colors text-xs font-bold text-zinc-300 w-full sm:w-auto self-start">
-                <Upload className="w-4 h-4 text-indigo-400" />
-                Upload New Image
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) => setAvatarFile(e.target.files ? e.target.files[0] : null)}
-                  className="hidden"
-                />
-              </label>
+              <span className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Avatar / Profile Picture URL</span>
+              <input
+                type="text"
+                value={profile.avatarUrl}
+                onChange={(e) => setProfile({ ...profile, avatarUrl: e.target.value })}
+                placeholder="https://i.imgur.com/... or upload file below"
+                className="w-full bg-zinc-900 border border-zinc-800 focus:border-indigo-500 focus:outline-none rounded-lg py-2 px-3 text-sm text-white transition-colors"
+              />
+              <div className="flex items-center gap-4 mt-1">
+                <label className="flex items-center gap-2 border border-dashed border-zinc-800 hover:border-zinc-700 bg-zinc-900/30 px-3 py-1.5 rounded-lg cursor-pointer transition-colors text-xs font-semibold text-zinc-300">
+                  <Upload className="w-3.5 h-3.5 text-indigo-400" />
+                  Or Upload File
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => setAvatarFile(e.target.files ? e.target.files[0] : null)}
+                    className="hidden"
+                  />
+                </label>
+              </div>
             </div>
           </div>
 
