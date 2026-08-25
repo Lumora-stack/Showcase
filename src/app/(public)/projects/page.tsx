@@ -30,8 +30,7 @@ export default function ProjectsPage() {
   useEffect(() => {
     const q = query(
       collection(db, "projects"),
-      where("published", "==", true),
-      orderBy("sortOrder", "asc")
+      where("published", "==", true)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -44,6 +43,8 @@ export default function ProjectsPage() {
           cats.add(data.category);
         }
       });
+      // Sort client-side to bypass Firestore Composite Index requirement
+      list.sort((a, b) => a.sortOrder - b.sortOrder);
       setProjects(list);
       setCategories(["All", ...Array.from(cats)]);
       setLoading(false);

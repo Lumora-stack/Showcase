@@ -31,8 +31,7 @@ export default function ProductsPage() {
   useEffect(() => {
     const q = query(
       collection(db, "products"),
-      where("published", "==", true),
-      orderBy("sortOrder", "asc")
+      where("published", "==", true)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -45,6 +44,8 @@ export default function ProductsPage() {
           cats.add(data.category);
         }
       });
+      // Sort client-side to bypass Firestore Composite Index requirement
+      list.sort((a, b) => a.sortOrder - b.sortOrder);
       setProducts(list);
       setCategories(["All", ...Array.from(cats)]);
       setLoading(false);

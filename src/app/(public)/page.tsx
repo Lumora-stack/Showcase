@@ -69,31 +69,31 @@ export default function HomePage() {
     // 2. Fetch Featured Projects
     const projectsQuery = query(
       collection(db, "projects"),
-      where("featured", "==", true),
-      where("published", "==", true),
-      limit(3)
+      where("published", "==", true)
     );
     const unsubscribeProjects = onSnapshot(projectsQuery, (snapshot) => {
       const projectsList: Project[] = [];
       snapshot.forEach((doc) => {
-        projectsList.push({ id: doc.id, ...doc.data() } as Project);
+        const data = doc.data() as Project;
+        projectsList.push({ ...data, id: doc.id });
       });
-      setFeaturedProjects(projectsList);
+      // Filter featured status and limit client-side to avoid Firestore composite index requirement
+      setFeaturedProjects(projectsList.filter((p) => p.featured).slice(0, 3));
     });
 
     // 3. Fetch Featured Products
     const productsQuery = query(
       collection(db, "products"),
-      where("featured", "==", true),
-      where("published", "==", true),
-      limit(3)
+      where("published", "==", true)
     );
     const unsubscribeProducts = onSnapshot(productsQuery, (snapshot) => {
       const productsList: Product[] = [];
       snapshot.forEach((doc) => {
-        productsList.push({ id: doc.id, ...doc.data() } as Product);
+        const data = doc.data() as Product;
+        productsList.push({ ...data, id: doc.id });
       });
-      setFeaturedProducts(productsList);
+      // Filter featured status and limit client-side to avoid Firestore composite index requirement
+      setFeaturedProducts(productsList.filter((p) => p.featured).slice(0, 3));
       setLoading(false);
     });
 
