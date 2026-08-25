@@ -268,7 +268,7 @@ export default function HomePage() {
                       {product.category}
                     </span>
                     <span className="text-base font-bold text-white">
-                      ${product.price.toFixed(2)}
+                      {product.currency === "INR" ? "₹" : "$"}{product.price.toFixed(2)}
                     </span>
                   </div>
                   <Link href={`/products/${product.slug}`} className="block mt-3 flex-grow">

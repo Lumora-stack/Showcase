@@ -333,7 +333,9 @@ function ProductsContent() {
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Price</label>
               <div className="relative">
-                <DollarSign className="absolute left-2.5 top-2.5 w-4 h-4 text-zinc-500" />
+                <span className="absolute left-3 top-2 text-sm font-bold text-zinc-500">
+                  {currency === "INR" ? "₹" : "$"}
+                </span>
                 <input
                   type="number"
                   step="0.01"
@@ -348,14 +350,14 @@ function ProductsContent() {
 
             <div className="flex flex-col gap-1.5">
               <label className="text-xs font-bold text-zinc-400 uppercase tracking-wide">Currency</label>
-              <input
-                type="text"
-                required
+              <select
                 value={currency}
                 onChange={(e) => setCurrency(e.target.value)}
-                placeholder="USD"
                 className="w-full bg-zinc-900 border border-zinc-800 focus:border-indigo-500 focus:outline-none rounded-lg py-2 px-3 text-sm text-white transition-colors"
-              />
+              >
+                <option value="USD">USD ($)</option>
+                <option value="INR">INR (₹)</option>
+              </select>
             </div>
 
             <div className="flex flex-col gap-1.5">
@@ -543,7 +545,7 @@ function ProductsContent() {
                         {prod.title}
                       </td>
                       <td className="px-6 py-3 font-mono font-semibold text-white">
-                        ${prod.price.toFixed(2)}
+                        {prod.currency === "INR" ? "₹" : "$"}{prod.price.toFixed(2)}
                       </td>
                       <td className="px-6 py-3 text-xs">{prod.category}</td>
                       <td className="px-6 py-3">

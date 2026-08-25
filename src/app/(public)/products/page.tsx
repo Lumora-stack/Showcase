@@ -149,7 +149,7 @@ export default function ProductsPage() {
                     {product.category || "Assets"}
                   </span>
                   <span className="text-base font-bold text-white">
-                    ${product.price.toFixed(2)}
+                    {product.currency === "INR" ? "₹" : "$"}{product.price.toFixed(2)}
                   </span>
                 </div>
                 <Link href={`/products/${product.slug}`} className="block mt-3.5 flex-grow">

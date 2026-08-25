@@ -148,7 +148,7 @@ export default function ProductDetailPage({ params }: PageProps) {
             </h1>
 
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-black text-white">${product.price.toFixed(2)}</span>
+              <span className="text-3xl font-black text-white">{product.currency === "INR" ? "₹" : "$"}{product.price.toFixed(2)}</span>
               <span className="text-zinc-500 text-sm font-semibold uppercase">{product.currency || "USD"}</span>
             </div>
 
