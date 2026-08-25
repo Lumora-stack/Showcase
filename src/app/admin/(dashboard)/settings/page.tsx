@@ -121,8 +121,12 @@ export default function AdminSettingsPage() {
       }
 
       const updatedProfile = {
-        ...profile,
-        avatarUrl: finalAvatarUrl,
+        name: profile.name || "",
+        bio: profile.bio || "",
+        avatarUrl: finalAvatarUrl || "",
+        heroTitle: profile.heroTitle || "",
+        heroSubtitle: profile.heroSubtitle || "",
+        email: profile.email || "",
         updatedAt: Date.now(),
       };
 

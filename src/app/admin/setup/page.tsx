@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { useRouter } from "next/navigation";
 import { ShieldCheck, Loader2 } from "lucide-react";
@@ -20,6 +20,8 @@ export default function SetupAdminPage() {
         "quantumvoyager2005@gmail.com",
         "StephanSalvatore"
       );
+      // Immediately sign out to prevent auto-login bypass, forcing manual password checks
+      await signOut(auth);
       setStatus("Success! Admin user registered. Redirecting to login...");
       setTimeout(() => {
         router.push("/admin/login");
