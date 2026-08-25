@@ -37,12 +37,14 @@ export default function Footer() {
   const [socials, setSocials] = useState<SocialLink[]>([]);
 
   useEffect(() => {
-    const q = query(collection(db, "socialLinks"), orderBy("sortOrder", "asc"));
+    const q = query(collection(db, "socialLinks"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const links: SocialLink[] = [];
       snapshot.forEach((doc) => {
         links.push({ id: doc.id, ...doc.data() } as SocialLink);
       });
+      // Sort client-side to bypass Firestore Index requirement
+      links.sort((a, b) => a.sortOrder - b.sortOrder);
       setSocials(links);
     }, (error) => {
       console.error("Error fetching social links in footer:", error);

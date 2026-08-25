@@ -275,7 +275,7 @@ export default function AdminSettingsPage() {
                 type="url"
                 value={profile.instagramUrl || ""}
                 onChange={(e) => setProfile({ ...profile, instagramUrl: e.target.value })}
-                placeholder="https://instagram.com/username"
+                placeholder="instagram.com/username"
                 className="w-full bg-zinc-900 border border-zinc-800 focus:border-indigo-500 focus:outline-none rounded-lg py-2 px-3 text-sm text-white transition-colors"
               />
             </div>
