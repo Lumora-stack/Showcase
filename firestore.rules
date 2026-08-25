@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper function to check if the request is authenticated
+    function isAdmin() {
+      return request.auth != null;
+    }
+
+    // Projects collection rules
+    match /projects/{project} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Products collection rules
+    match /products/{product} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Profile collection rules
+    match /profile/{doc} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Social Links collection rules
+    match /socialLinks/{link} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}
